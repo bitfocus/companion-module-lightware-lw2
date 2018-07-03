@@ -56,7 +56,7 @@ instance.prototype.init_tcp = function() {
 		});
 
 		self.socket.on('connect', function () {
-			self.socket.send("{VC}\r\n");
+			self.socket.send("{i}\r\n{VC}\r\n");
 		});
 
 		self.socket.on('error', function (err) {
@@ -93,6 +93,9 @@ instance.prototype.init_tcp = function() {
 					self.CHOICES_INPUTS.push({ label: 'Input ' + (i + 1), id: i+1 });
 					self.CHOICES_OUTPUTS.push({ label: 'Output ' + (i + 1), id: i+1 });
 				}
+			}
+			else if (match = line.match(/\(i:\s*(.+)\)$/i)) {
+				log('info', 'Connected to ' + match[1]);
 			}
 		});
 	}
