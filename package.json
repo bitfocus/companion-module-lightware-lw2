@@ -1,6 +1,11 @@
 {
-  "name": "companion-module-lightware2",
-  "version": "0.0.1",
+  "name": "lightware2",
+  "version": "1.0.0",
+	"api_version": "1.0.0",
+	"keywords": [ "Protocol", "Matrix" ],
+	"manufacturer": "Lightware",
+	"product": "LW2",
+	"shortname": "lightware",
   "description": "Companion module for controlling Lightware LW2 compatible products",
   "main": "index.js",
   "scripts": {
