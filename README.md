@@ -1,2 +1,2 @@
-# companion-module-lightware2
+# companion-module-lightware-lw2
 See HELP.md and LICENSE
