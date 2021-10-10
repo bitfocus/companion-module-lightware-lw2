@@ -3,7 +3,7 @@
 	"legacy": [
 		"lightware2"
 	],
-	"version": "1.0.2",
+	"version": "1.1.0",
 	"api_version": "1.0.0",
 	"keywords": [
 		"Protocol",
@@ -12,11 +12,11 @@
 	"manufacturer": "Lightware",
 	"product": "LW2",
 	"shortname": "lightwareLW2",
-	"description": "Companion module for controlling Lightware LW2 compatible products",
+	"description": "Companion module for controlling Lightware LW2 compatible products.",
 	"main": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
-	"author": "Håkon Nessjøen <haakon@bitfocus.io>",
+	"author": "Håkon Nessjøen <haakon@bitfocus.io>, Daniel Kaminski <daniel@dk-production.de>",
 	"license": "MIT"
 }

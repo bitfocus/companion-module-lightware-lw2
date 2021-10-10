@@ -19,7 +19,6 @@ function instance(system, id, config) {
 	instance_skel.apply(this, arguments);
 
 	self.init_actions(); // export actions
-
 	return self;
 }
 
@@ -64,7 +63,6 @@ instance.prototype.init_tcp = function() {
 
 		self.socket.on('connect', function () {
 			self.socket.send("{i}\r\n{VC}\r\n");
-
 			self.checkNumpresets();
 		});
 
@@ -87,25 +85,25 @@ instance.prototype.init_tcp = function() {
 
 		self.socket.on('receiveline', function (line) {
 			var match;
-
+			
 			if (match = line.match(/\(ALL\s+(.+)\s?\)\s*$/)) {
 				self.CHOICES_INPUTS.length = 0;
 				self.CHOICES_OUTPUTS.length = 0;
 
 				var outputs = match[1].split(/\s+/);
-				if (outputs[outputs.length-1] == '') {
+				if (outputs[outputs.length-1] == '') {				
 					outputs.length = outputs.length - 1;
 				}
 
-				// Assume equal number of inputs
+				// Do Not Assume equal number of inputs, use Config
 				for (var i = 0; i < outputs.length; ++i) {
-					self.CHOICES_INPUTS.push({ label: 'Input ' + (i + 1), id: i+1 });
 					self.CHOICES_OUTPUTS.push({ label: 'Output ' + (i + 1), id: i+1 });
-
-					self.setVariable('input_' + (i+1), 'Input '+(i+1));
 					self.setVariable('output_' + (i+1), 'Output '+(i+1));
-
 					self.xpt[i+1] = parseInt(outputs[i]);
+				}
+				for (var i = 0; i < self.config.inputCount; ++i) {
+					self.CHOICES_INPUTS.push({ label: 'Input ' + (i + 1), id: i+1 });
+					self.setVariable('input_' + (i+1), 'Input '+(i+1));			    
 				}
 
 				// Update inputs/outputs
@@ -123,7 +121,6 @@ instance.prototype.init_tcp = function() {
 			else if (match = line.match(/\(INAME#(\d+)=([^)]+)\)$/i)) {
 				var id = parseInt(match[1]);
 				var name = match[2];
-
 				self.setVariable('input_' + id, name);
 				self.CHOICES_INPUTS[id - 1] = { label: name, id: id };
 
@@ -178,8 +175,10 @@ instance.prototype.getIO = function() {
 
 	for (var i = 0; i < self.CHOICES_INPUTS.length; ++i) {
 		self.socket.send("{iname#" + (i+1) + "=?}");
-		self.socket.send("{oname#" + (i+1) + "=?}");
 	}
+	for (var i = 0; i < self.CHOICES_OUTPUTS.length; ++i) {
+		self.socket.send("{oname#" + (i+1) + "=?}");
+	}			
 };
 
 instance.prototype.getPresets = function() {
@@ -221,7 +220,7 @@ instance.prototype.config_fields = function () {
 			id: 'info',
 			width: 12,
 			label: 'Information',
-			value: 'This module is for controlling Lightware equipment that supports legacy LW2 protocol.'
+			value: 'This module is for controlling Lightware equipment that supports legacy LW2 protocol. You have to specify the amount of Inputs. Outputs are autodetected.'
 		},
 		{
 			type: 'textinput',
@@ -229,6 +228,17 @@ instance.prototype.config_fields = function () {
 			label: 'Device IP',
 			width: 12,
 			regex: self.REGEX_IP
+		},
+		{
+			type: 'number',
+			id: 'inputCount',
+			label: 'Input Count',
+			default: 40,
+			width: 3,
+			min: 0,
+			max: 100,
+			required: true,
+			range: false
 		}
 	]
 };
