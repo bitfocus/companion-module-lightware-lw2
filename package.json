@@ -12,7 +12,7 @@
 	"manufacturer": "Lightware",
 	"product": "LW2",
 	"shortname": "lightwareLW2",
-	"description": "Companion module for controlling Lightware LW2 compatible products",
+	"description": "Companion module for controlling Lightware LW2 compatible products.",
 	"main": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
