@@ -443,7 +443,7 @@ instance.prototype.init_actions = function(system) {
 		};
 	}
 
-	self.system.emit('instance_actions', self.id, actions);
+	self.setActions(actions);
 }
 
 instance.prototype.action = function(action) {
