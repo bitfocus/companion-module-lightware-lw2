@@ -1,4 +1,4 @@
-const { InstanceBase, Regex, runEntrypoint, InstanceStatus, TCPHelper } = require('@companion-module/base')
+const { InstanceBase, Regex, runEntrypoint, InstanceStatus, TCPHelper, combineRgb } = require('@companion-module/base')
 
 class LightwareLW2Instance extends InstanceBase {
 	constructor(internal) {
@@ -247,8 +247,8 @@ class LightwareLW2Instance extends InstanceBase {
 				description: 'If the input specified is in use by the output specified, change colors of the bank',
 				type: 'boolean',
 				defaultStyle: {
-					bgcolor: this.rgb(255, 0, 0),
-					color: this.rgb(255, 255, 255)
+					bgcolor: combineRgb(255, 0, 0),
+					color: combineRgb(255, 255, 255)
 				},
 				options: [
 					{
@@ -285,8 +285,8 @@ class LightwareLW2Instance extends InstanceBase {
 					style: {
 						text: '$(lightware-lw2:input_' + (i+1) + ')\\n$(lightware-lw2:output_' + (o+1) + ')',
 						size: 'auto',
-						color: this.rgb(255, 255, 255),
-						bgcolor: this.rgb(0, 0, 0)
+						color: combineRgb(255, 255, 255),
+						bgcolor: combineRgb(0, 0, 0)
 					},
 					feedbacks: [
 						{
@@ -324,8 +324,8 @@ class LightwareLW2Instance extends InstanceBase {
 					style: {
 						text: '$(lightware-lw2:preset_' + (i+1) + ')',
 						size: 'auto',
-						color: this.rgb(255, 255, 255),
-						bgcolor: this.rgb(0, 0, 0)
+						color: combineRgb(255, 255, 255),
+						bgcolor: combineRgb(0, 0, 0)
 					},
 					steps: [
 						{
@@ -348,8 +348,8 @@ class LightwareLW2Instance extends InstanceBase {
 					style: {
 						text: '$(lightware-lw2:preset_' + (i+1) + ')',
 						size: 'auto',
-						color: this.rgb(255, 255, 255),
-						bgcolor: this.rgb(0, 0, 0)
+						color: combineRgb(255, 255, 255),
+						bgcolor: combineRgb(0, 0, 0)
 					},
 					steps: [
 						{
